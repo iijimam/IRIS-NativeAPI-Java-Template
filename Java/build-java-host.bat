@@ -3,7 +3,7 @@ bitsadmin /transfer myDownloadJob /download /priority normal https://github.com/
 
 echo ---------------------------------------------------
 echo ** NativeAPI.Start.java compile **
-javac -cp .:%CD%/jar/intersystems-jdbc-3.2.0.jar NativeAPI/Start.java
+javac -encoding utf-8 -cp .:%CD%/jar/intersystems-jdbc-3.2.0.jar NativeAPI/Start.java
 
 
 set iriscontainerchk1=""
