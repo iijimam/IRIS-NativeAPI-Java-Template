@@ -3,8 +3,19 @@ Class App.Setup
 
 ClassMethod CreateSampleData(flg As %Integer = 1) [ SqlProc ]
 {
-	kill ^Correlation,^Character
+	kill ^Correlation
 	if flg=1 {
+		set ^Correlation("Eren")="主人公（エレン）"
+		set ^Correlation("Armin")="エレンの幼馴染（アルミン）"
+		set ^Correlation("Mikasa")="エレンの幼馴染（ミカサ）"
+		set ^Correlation("Grisha")="エレンのお父さん（グリシャ）"
+		set ^Correlation("Zeke")="エレンの異母兄弟（ジーク）"
+		set ^Correlation("Reiner")="鎧の巨人（ライナー）"
+		set ^Correlation("Bertolt")="超大型の巨人（ベルトルト）"
+		set ^Correlation("Carla")="エレンのお母さん（カルラ）：ダイナに捕食"
+		set ^Correlation("Dina")="ジークのお母さん（ダイナ）：レイス王家[フリッツ家]"
+		set ^Correlation("Levi")="人類最強の兵士（リヴァイ）"
+
 		set ^Correlation("Eren","Mikasa")=""
 		set ^Correlation("Eren","Armin")=""
 		set ^Correlation("Armin","Mikasa")=""
@@ -25,18 +36,16 @@ ClassMethod CreateSampleData(flg As %Integer = 1) [ SqlProc ]
 		set ^Correlation("Bertolt","Reiner")=""
 		set ^Correlation("Levi","Zeke")=""
 
-		set ^Character("Eren")="主人公（エレン）"
-		set ^Character("Armin")="エレンの幼馴染（アルミン）"
-		set ^Character("Mikasa")="エレンの幼馴染（ミカサ）"
-		set ^Character("Grisha")="エレンのお父さん（グリシャ）"
-		set ^Character("Zeke")="エレンの異母兄弟（ジーク）"
-		set ^Character("Reiner")="鎧の巨人（ライナー）"
-		set ^Character("Bertolt")="超大型の巨人（ベルトルト）"
-		set ^Character("Carla")="エレンのお母さん（カルラ）：ダイナに捕食"
-		set ^Character("Dina")="ジークのお母さん（ダイナ）：レイス王家[フリッツ家]"
-		set ^Character("Levi")="人類最強の兵士（リヴァイ）"
 	}
 	if flg=2 {
+		set ^Correlation("Momotaro")="主人公（桃太郎）"
+		set ^Correlation("Grandfather")="おじいさん"
+		set ^Correlation("Grandmother")="おばあさん"
+		set ^Correlation("Monkey")="サル"
+		set ^Correlation("Dog")="いぬ"
+		set ^Correlation("Pheasant")="キジ"
+		set ^Correlation("Daemon")="鬼"
+
 		set ^Correlation("Grandfather","Momotaro")=""
 		set ^Correlation("Grandmother","Momotaro")=""
 		set ^Correlation("Grandmother","Grandfather")=""
@@ -48,14 +57,6 @@ ClassMethod CreateSampleData(flg As %Integer = 1) [ SqlProc ]
 		set ^Correlation("Momotaro","Pheasant")=""
 		set ^Correlation("Pheasant","Momotaro")=""
 		set ^Correlation("Momotaro","Daemon")=""
-
-		set ^Character("Momotaro")="主人公（桃太郎）"
-		set ^Character("Grandfather")="おじいさん"
-		set ^Character("Grandmother")="おばあさん"
-		set ^Character("Monkey")="サル"
-		set ^Character("Dog")="いぬ"
-		set ^Character("Pheasant")="キジ"
-		set ^Character("Daemon")="鬼"
 	}
 }
 

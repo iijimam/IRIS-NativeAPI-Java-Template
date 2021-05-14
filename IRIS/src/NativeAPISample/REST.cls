@@ -19,25 +19,9 @@ ClassMethod GetCorrelation() As %Status
         set %response.CharSet="utf8"
         set %response.ContentType="application/json"
 
-        //以下のJSONを作る
-        /*
-            {
-                group : "nodes",
-                data: { id:"Dina",label: "ダイナ" }
-            },
-            {
-                group : "edges",
-                data: {
-                id: 'Eren-Armin',
-                source: "Eren",
-                target: 'Armin',
-                }
-            },
-        */
-
         set source="",nodes=[],edgeArray=[],elements={}
         for {
-            set source=$order(^Character(source),1,data)
+            set source=$order(^Correlation(source),1,data)
             if source="" {
                 quit  //ループ終了
             }
@@ -49,17 +33,6 @@ ClassMethod GetCorrelation() As %Status
             set node.data=nodedata
             do nodes.%Push(node)
 
-            // edgeデータ作成
-            /*
-                {
-                    group : "edges",
-                    data: {
-                    id: 'Eren-Armin',
-                    source: "Eren",
-                    target: 'Armin',
-                    }
-                },
-            */
             set target=""
             for {
                 set target=$order(^Correlation(source,target))

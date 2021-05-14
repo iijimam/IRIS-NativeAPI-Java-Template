@@ -35,26 +35,25 @@ public class Start{
 		//create irisNative object
 		IRIS irisNative = IRIS.createIRIS(dbconnection);
 
-		// ^Characterが存在するとき
-		if  (irisNative.isDefined("Character")==1) {
+		// ^Correlationが存在するとき
+		if  (irisNative.isDefined("Correlation")==1) {
 
             //グローバル変数を消去
-            System.out.println("^Character と ^Correlation を消去します\n");
-            irisNative.kill("Character");
+            System.out.println("^Correlation を消去します\n");
             irisNative.kill("Correlation");        
         }
 
         //set ^Character("Eren")="主人公（エレン）
-        irisNative.set("主人公（エレン）","Character","Eren");
-        irisNative.set("エレンの幼馴染（アルミン）","Character","Armin");
-        irisNative.set("エレンの幼馴染（ミカサ）","Character","Mikasa");
-        irisNative.set("エレンのお父さん（グリシャ）","Character","Grisha");
-        irisNative.set("エレンの異母兄弟（ジーク）","Character","Zeke");
-        irisNative.set("鎧の巨人（ライナー）","Character","Reiner");
-        irisNative.set("超大型の巨人（ベルトルト）","Character","Bertolt");
-        irisNative.set("エレンのお母さん（カルラ）：ダイナに捕食","Character","Carla");
-        irisNative.set("ジークのお母さん（ダイナ）：レイス王家[フリッツ家]","Character","Dina");
-        irisNative.set("人類最強の兵士（リヴァイ）","Character","Levi");
+        irisNative.set("主人公（エレン）","Correlation","Eren");
+        irisNative.set("エレンの幼馴染（アルミン）","Correlation","Armin");
+        irisNative.set("エレンの幼馴染（ミカサ）","Correlation","Mikasa");
+        irisNative.set("エレンのお父さん（グリシャ）","Correlation","Grisha");
+        irisNative.set("エレンの異母兄弟（ジーク）","Correlation","Zeke");
+        irisNative.set("鎧の巨人（ライナー）","Correlation","Reiner");
+        irisNative.set("超大型の巨人（ベルトルト）","Correlation","Bertolt");
+        irisNative.set("エレンのお母さん（カルラ）：ダイナに捕食","Correlation","Carla");
+        irisNative.set("ジークのお母さん（ダイナ）：レイス王家[フリッツ家]","Correlation","Dina");
+        irisNative.set("人類最強の兵士（リヴァイ）","Correlation","Levi");
 
         //関係性を設定
         //set ^Correlation("Eren","Mikasa")=""
@@ -78,10 +77,10 @@ public class Start{
         irisNative.set("","Correlation","Bertolt","Reiner");
         irisNative.set("","Correlation","Levi","Zeke");
 
-		System.out.println("****^Character に登録された人の関係者を全件表示します *****");
+		System.out.println("****^Correlation(第1ノード) に登録された人の関係者を全件表示します *****");
 
         // ^Character
-		IRISIterator character=irisNative.getIRISIterator("Character");
+		IRISIterator character=irisNative.getIRISIterator("Correlation");
 		while (character.hasNext()) {
 			String source=character.next();
 			System.out.println("\n人物 = "+ source + " - 説明："+ character.getValue());
@@ -93,7 +92,7 @@ public class Start{
             }
         }
 
-		System.out.println("\n\nIRISの管理ポータルで^Character と ^Correlation のデータを確認してください\n");
+		System.out.println("\n\nIRISの管理ポータルで ^Correlation のデータを確認してください\n");
 
 		//　クラスメソッド実行（戻り値が文字列）
 		//System.out.println("Training.PersonのCreateEmail()（クラスメソッド）＞＞"+irisNative.classMethodString("Training.Person", "CreateEmail","person1"));
@@ -110,14 +109,5 @@ public class Start{
             System.out.println(ex.getMessage());
         }
 	}
- 
-    //関係のある人表示
-    public static void getCorrelation(IRIS irisNative,String source) throws Exception {
-		IRISIterator sub2=irisNative.getIRISIterator("Correlation",source);
-		while (sub2.hasNext()) {
-			String target=sub2.next();
-			System.out.println("   関係のある人 : "+ target);
-        }
-    }
 
 }
