@@ -1,2 +1,2 @@
 Java/NativeAPI/*.class
-Java/jar/.*
+Java/jar/*.jar
