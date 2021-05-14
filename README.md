@@ -20,7 +20,7 @@ SNS の「友達」で考えると、ノードは「ユーザ」、辺は「友�
 テンプレートで使用している人物相関図では、ノードは「登場人物」、辺は「登場人物との関係」を表現しています。
 
 **人物相関図のノードと辺（エッジ）**
-![](https://github.com/iijimam/doc-images/blob/master/IRIS-NativeAPI-Template/Correlation.gif)
+![](https://github.com/iijimam/doc-images/blob/master/IRIS-NativeAPI-Template/Edge-Node.gif)
 
 
 ノードと辺を、どのようにグローバル変数に設定しているでしょうか。
