@@ -1,4 +1,3 @@
-//javac -encoding utf-8 NativeAPITest.java
 package NativeAPI;
 import java.util.Scanner;
 import com.intersystems.jdbc.IRIS;
