@@ -3,7 +3,7 @@ bitsadmin /transfer myDownloadJob /download /priority normal https://github.com/
 
 echo ---------------------------------------------------
 echo ** NativeAPI.Start.java compile **
-javac -encoding utf-8 -cp .:%CD%/jar/intersystems-jdbc-3.2.0.jar NativeAPI/Start.java
+javac -encoding utf-8 -cp .;%CD%\jar\intersystems-jdbc-3.2.0.jar NativeAPI\Start.java
 
 
 set iriscontainerchk1=""
@@ -25,7 +25,7 @@ docker-compose -f ../docker-compose.yml ps
 
 echo ---------------------------------------------------
 echo ** [Example]
-echo     runhost.bat" 
+echo     runhost.bat 
 echo **
 echo **
 echo ** you need to update host name before running.
