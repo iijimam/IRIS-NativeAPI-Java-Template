@@ -23,6 +23,7 @@ ClassMethod CreateSampleData(flg As %Integer = 1) [ SqlProc ]
 		set ^Correlation("Armin","Bertolt")=""
 		set ^Correlation("Reiner","Bertolt")=""
 		set ^Correlation("Bertolt","Reiner")=""
+		set ^Correlation("Levi","Zeke")=""
 
 		set ^Character("Eren")="主人公（エレン）"
 		set ^Character("Armin")="エレンの幼馴染（アルミン）"
@@ -33,6 +34,7 @@ ClassMethod CreateSampleData(flg As %Integer = 1) [ SqlProc ]
 		set ^Character("Bertolt")="超大型の巨人（ベルトルト）"
 		set ^Character("Carla")="エレンのお母さん（カルラ）：ダイナに捕食"
 		set ^Character("Dina")="ジークのお母さん（ダイナ）：レイス王家[フリッツ家]"
+		set ^Character("Levi")="人類最強の兵士（リヴァイ）"
 	}
 	if flg=2 {
 		set ^Correlation("Grandfather","Momotaro")=""

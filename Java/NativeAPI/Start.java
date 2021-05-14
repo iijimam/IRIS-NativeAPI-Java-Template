@@ -54,6 +54,7 @@ public class Start{
         irisNative.set("超大型の巨人（ベルトルト）","Character","Bertolt");
         irisNative.set("エレンのお母さん（カルラ）：ダイナに捕食","Character","Carla");
         irisNative.set("ジークのお母さん（ダイナ）：レイス王家[フリッツ家]","Character","Dina");
+        irisNative.set("人類最強の兵士（リヴァイ）","Character","Levi");
 
         //関係性を設定
         //set ^Correlation("Eren","Mikasa")=""
@@ -75,6 +76,7 @@ public class Start{
         irisNative.set("","Correlation","Armin","Bertolt");
         irisNative.set("","Correlation","Reiner","Bertolt");
         irisNative.set("","Correlation","Bertolt","Reiner");
+        irisNative.set("","Correlation","Levi","Zeke");
 
 		System.out.println("****^Character に登録された人の関係者を全件表示します *****");
 
