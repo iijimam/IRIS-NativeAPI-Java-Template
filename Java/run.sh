@@ -1,2 +1,2 @@
 #!/bin/sh
-java -jar /usr/projects/sample.jar
+java -cp .:/irislib/intersystems-jdbc-3.2.0.jar NativeAPI.Start

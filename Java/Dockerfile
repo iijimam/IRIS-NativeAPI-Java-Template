@@ -11,52 +11,22 @@ RUN apk add --update ca-certificates && rm -rf /var/cache/apk/* && \
   -file {} -alias {} \; && \
   keytool -list -keystore /usr/lib/jvm/java-1.8-openjdk/jre/lib/security/cacerts --storepass changeit
 
-ENV MAVEN_VERSION 3.6.0
-ENV MAVEN_HOME /usr/lib/mvn
-ENV PATH $MAVEN_HOME/bin:$PATH
-
-RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz && \
-  tar -zxvf apache-maven-$MAVEN_VERSION-bin.tar.gz && \
-  rm apache-maven-$MAVEN_VERSION-bin.tar.gz && \
-  mv apache-maven-$MAVEN_VERSION /usr/lib/mvn
-
-# End of Section 1
-
-# Section 2 - For health check
-RUN apk --update --no-cache add curl
-# End of Section 2
-
-# Section 3 - IRIS Specific
-
 WORKDIR /irislib
 
 # mvnローカルリポジトリにサンプルで使用するJarファイルをインストール
-COPY --from=IRIS /usr/irissys/dev/java/lib/JDK18/*.jar /irislib/
-RUN mvn install:install-file -Dfile=/irislib/intersystems-jdbc-3.2.0.jar \
--DgroupId=com.intersystems \
--DartifactId=intersystems-jdbc \
--Dversion=3.2.0 \
--Dpackaging=jar \
--DcreateChecksum=true
+COPY --from=IRIS /usr/irissys/dev/java/lib/JDK18/intersystems-jdbc-3.2.0.jar /irislib/
 
-# End of Section 3
-
-# Configuring make
 RUN apk add --update alpine-sdk
 
 # mavenプロジェクトを配置するディレクトリを作成
 WORKDIR /usr/projects
 
-# maven package に必要なファイルをコピー
-COPY ./pom.xml .
-COPY ./src/main/java/ ./src/main/java/
+COPY NativeAPI NativeAPI
 
-# ビルドで作成した jarファイルを操作しやすい名称に変更（sample.jar）
-RUN mvn package && \
- cp /usr/projects/target/nativeapi-java-template-1.0-jar-with-dependencies.jar /usr/projects/sample.jar
+# コンパイル
+RUN javac -cp .:/irislib/intersystems-jdbc-3.2.0.jar /usr/projects/NativeAPI/Start.java
 
 COPY ./run.sh ./run1.sh
-
 # Windows上でコンテナをビルドする場合の対応
 RUN sed -e 's/\r//g' -e "s///" run1.sh > run.sh && \
  chmod 755 ./run.sh
