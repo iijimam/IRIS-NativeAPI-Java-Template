@@ -42,7 +42,7 @@ public class Start{
             irisNative.kill("Correlation");        
         }
 
-        //set ^Character("Eren")="主人公（エレン）
+        //set ^Correlation("Eren")="主人公（エレン）
         irisNative.set("主人公（エレン）","Correlation","Eren");
         irisNative.set("エレンの幼馴染（アルミン）","Correlation","Armin");
         irisNative.set("エレンの幼馴染（ミカサ）","Correlation","Mikasa");
@@ -78,7 +78,7 @@ public class Start{
 
 		System.out.println("****^Correlation(第1ノード) に登録された人の関係者を全件表示します *****");
 
-        // ^Character
+        // ^Correlation
 		IRISIterator character=irisNative.getIRISIterator("Correlation");
 		while (character.hasNext()) {
 			String source=character.next();
