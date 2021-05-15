@@ -97,7 +97,7 @@ public class Start{
 		System.out.println("\n\nIRISの管理ポータルで ^Correlation のデータを確認してください\n");
 
 
-        System.out.print("\n指定した人物の関係者を探します。人物名を入力（Eren、Levi、Zeke など） >>");
+        System.out.print("\n指定した人物の関係者を探します。人物名を入力（Armin、Levi、Zeke など） >>");
         Scanner scan = new Scanner(System.in); 
         String name = scan.nextLine();
 
