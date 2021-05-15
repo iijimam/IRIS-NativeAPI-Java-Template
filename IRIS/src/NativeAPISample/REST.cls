@@ -70,7 +70,7 @@ ClassMethod GetCorrelationKey(key As %String) As %Status
         set %response.CharSet="utf8"
         set %response.ContentType="application/json"
 
-         do ..getTargets(key,1,.array)
+        do ..getTargets(key,1,.array)
         set source="",nodes=[],edgeArray=[],elements={}
         for {
             set source=$order(array(source),1,data)
@@ -118,10 +118,10 @@ ClassMethod getTargets(source As %String, count As %Integer, ByRef array As %Str
 {
     if count>4 return
     if $get(source)="" return
-    set array(source)=$get(^Correlation(source))
     set target="",result=""
     for {
         set target=$order(^Correlation(source,target))
+        set array(target)=$get(^Correlation(target))
         if target="" {
             quit  //ループ終了
         }
