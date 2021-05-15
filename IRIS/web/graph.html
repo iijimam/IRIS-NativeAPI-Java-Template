@@ -4,8 +4,8 @@
 
 <head>
     <title>IRISのグローバル変数を使ってグラフデータ表示</title>
-    <!-- <script src="./cytoscape.js/dist/cytoscape.min.js"></script> -->
-    <script src="https://cdn.bootcss.com/cytoscape/2.3.16/cytoscape.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.18.2/cytoscape.min.js"></script>
+
 </head>
 
 <style>
@@ -27,8 +27,8 @@
       var username = "_SYSTEM"
       var password = "SYS"
       var a64 = btoa(`${username}:${password}`)
-      //var url="http://localhost:52773/graph/correlation"
       var url="/graph/correlation"
+      //var url="http://localhost:52773/graph/correlation"
       // RESTで場所を取得
       fetch(url, {
           method: "GET",
@@ -42,30 +42,9 @@
       }).then(function(json) {
         console.log("取得結果=" +JSON.stringify(json));
 
-        //内容要素を表現するCSS
-        var style = [
-          { selector: 'node', 
-            css: {shape: 'hexagon','background-color': 'red',content: 'data(label)'}
-          },
-          { selector: 'edge', 
-            css: {'width': 4, 'line-color': '#ccc','target-arrow-color': '#ccc','target-arrow-shape': 'triangle','curve-style': 'bezier'}
-          } 
-        ]
-
-        //レイアウト設定
-        var layout = {
-          //グリッドレイアウトを適用する
-          name : "breadthfirst"
-        }
-
         var cy = cytoscape({
-          container: document.getElementById('cy'),
-          style: style,
-          layout: layout,
+          container: document.getElementById('cy')
         });
-
-        cy.add(json);
-        /*
         cy.style().selector("edge").style({
           'width': 4,
           'line-color': '#ccc',
@@ -85,7 +64,7 @@
         cy.layout({
           name: 'breadthfirst'
         }).run();
-        */
+
       }).catch(function(err) {
           console.log("err="+err);
       });
