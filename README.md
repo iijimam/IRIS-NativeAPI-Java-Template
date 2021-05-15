@@ -69,6 +69,18 @@ set ^Correlation("Mikasa","Eren")=""
 ![](https://github.com/iijimam/doc-images/blob/master/IRIS-NativeAPI-Template/MP-Global.gif)
 
 
+ここまでのグローバル変数を Java から設定する場合のコードは以下の通りです。コード全体については (Start.java)[/Java/NativeAPI/Start.java] をご参照ください。
+```
+irisNative.set("主人公（エレン）","Correlation","Eren");
+irisNative.set("","Correlation","Eren","Mikasa");
+irisNative.set("","Correlation","Eren","Armin");
+irisNative.set("","Correlation","Eren","Zeke");
+
+irisNative.set("エレンの幼馴染（ミカサ）","Correlation","Mikasa");
+irisNative.set("","Correlation","Mikasa","Armin");
+irisNative.set("","Correlation","Mikasa","Eren");
+```
+
 
 ## 1) テンプレートの処理概要
 
