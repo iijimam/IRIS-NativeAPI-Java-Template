@@ -115,6 +115,12 @@ Java からデータ登録後、[Cytoscape.js](https://js.cytoscape.org/) を利
 
 > REST 経由でグローバル変数を取得しています。IRIS で作成する REST サーバについてご興味ある方は、ぜひ [こちらの記事](https://jp.community.intersystems.com/node/479546) もご参照ください。
 
+登場人物を特定して関係者を探す場合は、クエリ文字列に人物名を指定してください（人物名は大小文字を区別します。先頭文字が大文字後は小文字で登録しています）。
+
+ - 例1 [http://ホスト名:52779/csp/user/graph.html?Levi](http://localhost:52779/csp/user/graph.html?Levi)
+
+ - 例2 [http://ホスト名:52779/csp/user/graph.html?Armin](http://localhost:52779/csp/user/graph.html?Armin)
+
 
 実行手順は以下の通りです。
 
@@ -157,6 +163,10 @@ git clone https://github.com/Intersystems-jp/IRIS-NativeAPI-Java-Template.git
 
 3) サンプルを動かす方法
 
+    データを登録した後、登場人物の全関係者を表示します。
+    
+    その後、画面で登場人物名を入力すると、指定した人物の関係者を画面表示します。
+    
     ```
     $ docker-compose run java
     Creating iris-nativeapi-java-template_java_run ... done
@@ -173,6 +183,14 @@ git clone https://github.com/Intersystems-jp/IRIS-NativeAPI-Java-Template.git
 
     IRISの管理ポータルで ^Correlation のデータを確認してください
 
+    指定した人物の関係者を探します。人物名を入力（Eren、Levi、Zeke など） >>Zeke
+
+    Zeke の関係者を探します
+    関係者 : Eren
+
+    Eren の関係者を探します
+    関係者 : Armin
+        <省略>
     $
     ```
 4) コンテナを停止する方法
@@ -226,6 +244,9 @@ IRISHOSTNAME="localhost"
 
 Javaの実行には、[runhost.sh](./Java/runhost.sh) を使用します。
 
+データを登録した後、登場人物の全関係者を表示します。
+その後、画面で登場人物名を入力すると、指定した人物の関係者を画面表示します。
+
 実行例）
 ```
 $ ./runhost.sh
@@ -243,6 +264,18 @@ InterSystemsIRISにJDBC経由で接続できました
      ＜表示省略＞
 IRISの管理ポータルで ^Correlation のデータを確認してください
 
+指定した人物の関係者を探します。人物名を入力（Armin、Levi、Zeke など） >>Levi
+
+Levi の関係者を探します
+   関係者 : Zeke
+
+Zeke の関係者を探します
+   関係者 : Eren
+
+Eren の関係者を探します
+   関係者 : Armin
+   関係者 : Mikasa
+   関係者 : Zeke
 ----------------------
 ** 処理終了しました **
 ----------------------
@@ -263,9 +296,6 @@ SET IRISHOSTNAME=localhost
 
 準備ができたら以下の手順で実行してください。
 
-Maven を使用したビルドと、IRIS 用コンテナを開始します。
-
-
 ```
 ~/IRIS-NativeAPI-Java-Template> cd Java
 ~/IRIS-NativeAPI-Java-Template/Java> host-java-params.bat
@@ -274,6 +304,8 @@ Maven を使用したビルドと、IRIS 用コンテナを開始します。
 
 Javaの実行には、[runhost.bat](./Java/runhost.bat) を使用します。
 
+データを登録した後、登場人物の全関係者を表示します。
+その後、画面で登場人物名を入力すると、指定した人物の関係者を画面表示します。
 
 実行例）
 ```
@@ -291,6 +323,18 @@ InterSystemsIRISにJDBC経由で接続できました
     ＜表示省略＞
 IRISの管理ポータルで ^Correlation のデータを確認してください
 
+指定した人物の関係者を探します。人物名を入力（Armin、Levi、Zeke など） >>Levi
+
+Levi の関係者を探します
+   関係者 : Zeke
+
+Zeke の関係者を探します
+   関係者 : Eren
+
+Eren の関係者を探します
+   関係者 : Armin
+   関係者 : Mikasa
+   関係者 : Zeke
 -----------------------
  ** completed !! **
 -----------------------
