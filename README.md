@@ -69,7 +69,7 @@ set ^Correlation("Mikasa","Eren")=""
 ![](https://github.com/iijimam/doc-images/blob/master/IRIS-NativeAPI-Template/MP-Global.gif)
 
 
-ここまでのグローバル変数を Java から設定する場合のコードは以下の通りです。コード全体については (Start.java)[/Java/NativeAPI/Start.java] をご参照ください。
+ここまでのグローバル変数を Java から設定する場合のコードは以下の通りです。コード全体については [Start.java](/Java/NativeAPI/Start.java) をご参照ください。
 ```
 irisNative.set("主人公（エレン）","Correlation","Eren");
 irisNative.set("","Correlation","Eren","Mikasa");
