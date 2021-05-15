@@ -1,5 +1,8 @@
 package NativeAPI;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import com.intersystems.jdbc.IRIS;
 import com.intersystems.jdbc.IRISConnection;
 import com.intersystems.jdbc.IRISDataSource;
@@ -93,12 +96,12 @@ public class Start{
 
 		System.out.println("\n\nIRISの管理ポータルで ^Correlation のデータを確認してください\n");
 
-		//　クラスメソッド実行（戻り値が文字列）
-		//System.out.println("Training.PersonのCreateEmail()（クラスメソッド）＞＞"+irisNative.classMethodString("Training.Person", "CreateEmail","person1"));
 
-		//　ルーチン実行（戻り値が文字列）
-		//System.out.println("NativeAPITestルーチンのtest()実行＞＞"+irisNative.functionString("test1","NativeAPITest"));
+        System.out.print("\n指定した人物の関係者を探します。人物名を入力（Eren、Levi、Zeke など） >>");
+        Scanner scan = new Scanner(System.in); 
+        String name = scan.nextLine();
 
+        getTargets(irisNative,name,1);        
 
 		//irisの接続をClose
 		irisNative.close();
@@ -109,4 +112,27 @@ public class Start{
         }
 	}
 
+    // 指定された第2引数の関係者を取得する
+    static void getTargets(IRIS irisNative,String source,int count) {
+        try {
+            if (count >3) {
+                return;
+            }
+            List<String> result = new ArrayList<String>();
+            System.out.println("\n" + source + " の関係者を探します");
+            //関係のある人を表示
+            IRISIterator correlate=irisNative.getIRISIterator("Correlation",source);
+            while (correlate.hasNext()) {
+                String target=correlate.next();
+                System.out.println("   関係者 : " + target);
+                result.add(target);
+            }
+            for (int i=0; i<result.size(); i++){
+                getTargets(irisNative,result.get(i),count+1);
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
