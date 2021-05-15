@@ -121,10 +121,10 @@ ClassMethod getTargets(source As %String, count As %Integer, ByRef array As %Str
     set target="",result=""
     for {
         set target=$order(^Correlation(source,target))
-        set array(target)=$get(^Correlation(target))
         if target="" {
             quit  //ループ終了
         }
+        set array(target)=$get(^Correlation(target))
         set array(source,target)=""
         set $list(result,$listlength(result)+1)=target
     }
