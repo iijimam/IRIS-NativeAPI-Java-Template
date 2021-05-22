@@ -1,12 +1,5 @@
 version: '3.7'
 
-networks:
-  isjdctemplate-network:
-    name: isjdctemplate-network
-    driver: bridge
-    ipam:
-      driver: default
-
 services:
   iris:
     build:
@@ -23,8 +16,6 @@ services:
       - "1972:1972"
     environment:
       TZ: JST-9
-    networks:
-      - isjdctemplate-network
 
   # docker-compose run java GPXSamples/Sakurajima.gpx.xml
   java:
@@ -35,7 +26,3 @@ services:
     init: true
     environment:
       TZ: JST-9
-    #volumes:
-    #  - ./Java/GPXSamples:/usr/projects/GPXSamples
-    networks: 
-      - isjdctemplate-network
