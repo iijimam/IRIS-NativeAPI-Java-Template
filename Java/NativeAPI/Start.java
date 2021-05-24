@@ -101,7 +101,9 @@ public class Start{
         Scanner scan = new Scanner(System.in); 
         String name = scan.nextLine();
 
-        getTargets(irisNative,name,1);        
+        if (!("".equals(name))) {
+            getTargets(irisNative,name,1);        
+        }
 
 		//irisの接続をClose
 		irisNative.close();
