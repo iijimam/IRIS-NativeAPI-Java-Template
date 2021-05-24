@@ -1,6 +1,5 @@
-#ARG IMAGE=store/intersystems/iris-community:2020.4.0.547.0
 # 2021.1 preview (As of May 2021)
-ARG IMAGE=store/intersystems/iris-community:2021.1.0.205.0
+ARG IMAGE=containers.intersystems.com/intersystems/iris-community:2021.1.0.205.0
 FROM $IMAGE
 
 USER root
