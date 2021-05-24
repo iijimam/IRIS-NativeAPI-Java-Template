@@ -5,7 +5,7 @@
 テンプレートの中では、以下の人物相関図のイメージを IRIS に登録しています。
 
 **人物相関図のイメージ**
-![](https://github.com/iijimam/doc-images/blob/master/IRIS-NativeAPI-Template/Correlation.gif)
+![](https://github.com/iijimam/doc-images/blob/master/IRIS-NativeAPI-Template/Relation.gif)
 
 人物相関図と言えば、グラフデータベースをイメージされると思います。
 
@@ -28,36 +28,36 @@ SNS の「友達」で考えると、ノードは「ユーザ」、辺は「友�
 
 ノードは以下の通りです（配列には、画面表示に利用するノードの ID を設定し、右辺に人物名を登録しています）。
 ```
-^Correlation("Eren")="主人公（エレン）"
+^Relation("Eren")="主人公（エレン）"
 ```
 
 辺（エッジ）は以下の通りです（グローバル変数の配列を利用して、登場人物→関係のある人[ソース→ターゲット]を設定しています）。
 >主人公エレンは、アルミン、ミカサ、ジークと関係がある。を表現しています。
 
 ```
-^Correlation("Eren","Armin")="" 
-^Correlation("Eren","Mikasa")=""
-^Correlation("Eren","Zeke")=""
+^Relation("Eren","Armin")="" 
+^Relation("Eren","Mikasa")=""
+^Relation("Eren","Zeke")=""
 ```
 
 両者で関係がある場合は、さらに以下のような配列を追加します。
 
 ```
-^Correlation("Mikasa")="エレンの幼馴染（ミカサ）"
-^Correlation("Mikasa","Armin")=""
-^Correlation("Mikasa","Eren")=""
+^Relation("Mikasa")="エレンの幼馴染（ミカサ）"
+^Relation("Mikasa","Armin")=""
+^Relation("Mikasa","Eren")=""
 ```
 
 実際に、IRIS サーバ側で記述する場合には、[ObjectScript](https://docs.intersystems.com/irislatestj/csp/docbook/Doc.View.cls?KEY=AFL_objectscript) の SET コマンドを使用してグローバル変数を設定します。
 
 ```
-set ^Correlation("Eren")="主人公（エレン）"
-set ^Correlation("Eren","Mikasa")=""
-set ^Correlation("Eren","Armin")=""
-set ^Correlation("Eren","Zeke")=""
-set ^Correlation("Mikasa")="エレンの幼馴染（ミカサ）"
-set ^Correlation("Mikasa","Armin")=""
-set ^Correlation("Mikasa","Eren")=""
+set ^Relation("Eren")="主人公（エレン）"
+set ^Relation("Eren","Mikasa")=""
+set ^Relation("Eren","Armin")=""
+set ^Relation("Eren","Zeke")=""
+set ^Relation("Mikasa")="エレンの幼馴染（ミカサ）"
+set ^Relation("Mikasa","Armin")=""
+set ^Relation("Mikasa","Eren")=""
 ```
 
 配列のサブスクリプト（括弧の中身）は、配列のノード（例では、第 1 番目と第 2 番目）毎に Unicode 昇順でソートされます。
@@ -65,20 +65,20 @@ set ^Correlation("Mikasa","Eren")=""
 実行後、管理ポータルなどからグローバル変数一覧を参照すると、実行順に関係なく Unicode 昇順にソートされていることを確認できます。
 > 管理ポータルは、[http://ホスト名:52779/csp/sys/UtilHome.csp](http://localhost:52779/csp/sys/UtilHome.csp) でアクセスできます（ユーザ名：_system　、パスワード：SYS）。
 
-管理ポータル > [システムエクスプローラ] > [グローバル] > 左画面で「ネームスペース」USER を選択 > ^Correlation の「表示」をクリック
+管理ポータル > [システムエクスプローラ] > [グローバル] > 左画面で「ネームスペース」USER を選択 > ^Relation の「表示」をクリック
 ![](https://github.com/iijimam/doc-images/blob/master/IRIS-NativeAPI-Template/MP-Global.gif)
 
 
 ここまでのグローバル変数を Java から設定する場合のコードは以下の通りです。コード全体については [Start.java](/Java/NativeAPI/Start.java) をご参照ください。
 ```
-irisNative.set("主人公（エレン）","Correlation","Eren");
-irisNative.set("","Correlation","Eren","Mikasa");
-irisNative.set("","Correlation","Eren","Armin");
-irisNative.set("","Correlation","Eren","Zeke");
+irisNative.set("主人公（エレン）","Relation","Eren");
+irisNative.set("","Relation","Eren","Mikasa");
+irisNative.set("","Relation","Eren","Armin");
+irisNative.set("","Relation","Eren","Zeke");
 
-irisNative.set("エレンの幼馴染（ミカサ）","Correlation","Mikasa");
-irisNative.set("","Correlation","Mikasa","Armin");
-irisNative.set("","Correlation","Mikasa","Eren");
+irisNative.set("エレンの幼馴染（ミカサ）","Relation","Mikasa");
+irisNative.set("","Relation","Mikasa","Armin");
+irisNative.set("","Relation","Mikasa","Eren");
 ```
 
 
@@ -171,7 +171,7 @@ git clone https://github.com/Intersystems-jp/IRIS-NativeAPI-Java-Template.git
     $ docker-compose run java
     Creating iris-nativeapi-java-template_java_run ... done
     InterSystemsIRISにJDBC経由で接続できました
-    ****^Correlation(第1ノード) に登録された人の関係者を全件表示します *****
+    ****^Relation(第1ノード) に登録された人の関係者を全件表示します *****
 
     人物 = Armin - 説明：エレンの幼馴染（アルミン）
     関係者 : Bertolt
@@ -181,7 +181,7 @@ git clone https://github.com/Intersystems-jp/IRIS-NativeAPI-Java-Template.git
     人物 = Bertolt - 説明：超大型の巨人（ベルトルト）
         <省略>
 
-    IRISの管理ポータルで ^Correlation のデータを確認してください
+    IRISの管理ポータルで ^Relation のデータを確認してください
 
     指定した人物の関係者を探します。人物名を入力（Eren、Levi、Zeke など） >>Zeke
 
@@ -252,7 +252,7 @@ Javaの実行には、[runhost.sh](./Java/runhost.sh) を使用します。
 $ ./runhost.sh
 isjedu@iijimatest:~/testcontainer/IRIS-NativeAPI-Java-Template/Java$ ./runhost.sh
 InterSystemsIRISにJDBC経由で接続できました
-****^Correlation(第1ノード) に登録された人の関係者を全件表示します *****
+****^Relation(第1ノード) に登録された人の関係者を全件表示します *****
 
 人物 = Armin - 説明：エレンの幼馴染（アルミン）
    関係者 : Bertolt
@@ -262,7 +262,7 @@ InterSystemsIRISにJDBC経由で接続できました
 人物 = Bertolt - 説明：超大型の巨人（ベルトルト）
    関係者 : Reiner
      ＜表示省略＞
-IRISの管理ポータルで ^Correlation のデータを確認してください
+IRISの管理ポータルで ^Relation のデータを確認してください
 
 指定した人物の関係者を探します。人物名を入力（Armin、Levi、Zeke など） >>Levi
 
@@ -311,7 +311,7 @@ Javaの実行には、[runhost.bat](./Java/runhost.bat) を使用します。
 ```
 > runhost.bat
 InterSystemsIRISにJDBC経由で接続できました
-****^Correlation(第1ノード) に登録された人の関係者を全件表示します *****
+****^Relation(第1ノード) に登録された人の関係者を全件表示します *****
 
 人物 = Armin - 説明：エレンの幼馴染（アルミン）
    関係者 : Bertolt
@@ -321,7 +321,7 @@ InterSystemsIRISにJDBC経由で接続できました
 人物 = Bertolt - 説明：超大型の巨人（ベルトルト）
    関係者 : Reiner
     ＜表示省略＞
-IRISの管理ポータルで ^Correlation のデータを確認してください
+IRISの管理ポータルで ^Relation のデータを確認してください
 
 指定した人物の関係者を探します。人物名を入力（Armin、Levi、Zeke など） >>Levi
 

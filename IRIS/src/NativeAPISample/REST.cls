@@ -6,12 +6,12 @@ Parameter HandleCorsRequest = 1;
 XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 {
 <Routes>
-<Route Url="/correlation" Method="GET" Call="GetCorrelation" Cors="true"/>
-<Route Url="/correlation/:key" Method="GET" Call="GetCorrelationKey" Cors="true"/>
+<Route Url="/relation" Method="GET" Call="GetRelation" Cors="true"/>
+<Route Url="/relation/:key" Method="GET" Call="GetRelationKey" Cors="true"/>
 </Routes>
 }
 
-ClassMethod GetCorrelation() As %Status
+ClassMethod GetRelation() As %Status
 {
     #dim ex As %Exception.AbstractException
     #dim %response As %CSP.Response
@@ -22,7 +22,7 @@ ClassMethod GetCorrelation() As %Status
 
         set source="",nodes=[],edgeArray=[],elements={}
         for {
-            set source=$order(^Correlation(source),1,data)
+            set source=$order(^Relation(source),1,data)
             if source="" {
                 quit  //ループ終了
             }
@@ -30,13 +30,13 @@ ClassMethod GetCorrelation() As %Status
             set node={}
             set nodedata={}
             set nodedata.id=source
-            set nodedata.label=data
+            set nodedata.label=$replace(data,$Char(10),"")  //Pythonから \n 入りで登録されるため
             set node.data=nodedata
             do nodes.%Push(node)
 
             set target=""
             for {
-                set target=$order(^Correlation(source,target))
+                set target=$order(^Relation(source,target))
                 if target="" {
                     quit //ループ終了
                 }
@@ -61,7 +61,7 @@ ClassMethod GetCorrelation() As %Status
     return status
 }
 
-ClassMethod GetCorrelationKey(key As %String) As %Status
+ClassMethod GetRelationKey(key As %String) As %Status
 {
     #dim ex As %Exception.AbstractException
     #dim %response As %CSP.Response
@@ -69,8 +69,7 @@ ClassMethod GetCorrelationKey(key As %String) As %Status
     try {
         set %response.CharSet="utf8"
         set %response.ContentType="application/json"
-        
-        set array(key)=$get(^Correlation(key))
+        set array(key)=$get(^Relation(key))
         do ..getTargets(key,1,.array)
         set source="",nodes=[],edgeArray=[],elements={}
         for {
@@ -82,7 +81,7 @@ ClassMethod GetCorrelationKey(key As %String) As %Status
             set node={}
             set nodedata={}
             set nodedata.id=source
-            set nodedata.label=data
+            set nodedata.label=$replace(data,$Char(10),"")  //Pythonから \n 入りで登録されるため
             set node.data=nodedata
             do nodes.%Push(node)
 
@@ -121,11 +120,11 @@ ClassMethod getTargets(source As %String, count As %Integer, ByRef array As %Str
     if $get(source)="" return
     set target="",result=""
     for {
-        set target=$order(^Correlation(source,target))
+        set target=$order(^Relation(source,target))
         if target="" {
             quit  //ループ終了
         }
-        set array(target)=$get(^Correlation(target))
+        set array(target)=$get(^Relation(target))
         set array(source,target)=""
         set $list(result,$listlength(result)+1)=target
     }

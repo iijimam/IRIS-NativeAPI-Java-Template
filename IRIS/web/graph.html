@@ -28,13 +28,13 @@
       var username = "_SYSTEM"
       var password = "SYS"
       var a64 = btoa(`${username}:${password}`)
-      var url="/graph/correlation"
+      var url="/graph/relation"
       var querystring=location.search.substring(1);
       if (querystring.length>0) {
         url=url+ "/" + querystring;
         console.log(url);
       }
-      //var url="http://localhost:52773/graph/correlation"
+      //var url="http://localhost:52773/graph/relation"
       // RESTで場所を取得
       fetch(url, {
           method: "GET",

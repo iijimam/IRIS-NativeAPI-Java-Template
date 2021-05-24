@@ -37,64 +37,64 @@ public class Start{
 		//create irisNative object
 		IRIS irisNative = IRIS.createIRIS(dbconnection);
 
-		// ^Correlationが存在するとき
-		if  (irisNative.isDefined("Correlation")==1) {
+		// ^Relationが存在するとき
+		if  (irisNative.isDefined("Relation")==1) {
 
             //グローバル変数を消去
-            System.out.println("^Correlation を消去します\n");
-            irisNative.kill("Correlation");        
+            System.out.println("^Relation を消去します\n");
+            irisNative.kill("Relation");        
         }
 
-        //set ^Correlation("Eren")="主人公（エレン）
-        irisNative.set("主人公（エレン）","Correlation","Eren");
-        irisNative.set("エレンの幼馴染（アルミン）","Correlation","Armin");
-        irisNative.set("エレンの幼馴染（ミカサ）","Correlation","Mikasa");
-        irisNative.set("エレンのお父さん（グリシャ）","Correlation","Grisha");
-        irisNative.set("エレンの異母兄弟（ジーク）","Correlation","Zeke");
-        irisNative.set("鎧の巨人（ライナー）","Correlation","Reiner");
-        irisNative.set("超大型の巨人（ベルトルト）","Correlation","Bertolt");
-        irisNative.set("エレンのお母さん（カルラ）：ダイナに捕食","Correlation","Carla");
-        irisNative.set("ジークのお母さん（ダイナ）：レイス王家[フリッツ家]","Correlation","Dina");
-        irisNative.set("人類最強の兵士（リヴァイ）","Correlation","Levi");
+        //set ^Relation("Eren")="主人公（エレン）
+        irisNative.set("主人公（エレン）","Relation","Eren");
+        irisNative.set("エレンの幼馴染（アルミン）","Relation","Armin");
+        irisNative.set("エレンの幼馴染（ミカサ）","Relation","Mikasa");
+        irisNative.set("エレンのお父さん（グリシャ）","Relation","Grisha");
+        irisNative.set("エレンの異母兄弟（ジーク）","Relation","Zeke");
+        irisNative.set("鎧の巨人（ライナー）","Relation","Reiner");
+        irisNative.set("超大型の巨人（ベルトルト）","Relation","Bertolt");
+        irisNative.set("エレンのお母さん（カルラ）：ダイナに捕食","Relation","Carla");
+        irisNative.set("ジークのお母さん（ダイナ）：レイス王家[フリッツ家]","Relation","Dina");
+        irisNative.set("人類最強の兵士（リヴァイ）","Relation","Levi");
 
         //関係性を設定
-        //set ^Correlation("Eren","Mikasa")=""
-        irisNative.set("","Correlation","Eren","Mikasa");
-        irisNative.set("","Correlation","Eren","Armin");
-        irisNative.set("","Correlation","Armin","Mikasa");
-        irisNative.set("","Correlation","Mikasa","Armin");
-        irisNative.set("","Correlation","Armin","Eren");
-        irisNative.set("","Correlation","Mikasa","Eren");
-        irisNative.set("","Correlation","Grisha","Eren");
-        irisNative.set("","Correlation","Grisha","Zeke");
-        irisNative.set("","Correlation","Eren","Zeke");
-        irisNative.set("","Correlation","Zeke","Eren");
-        irisNative.set("","Correlation","Grisha","Dina");
-        irisNative.set("","Correlation","Dina","Grisha");            
-        irisNative.set("","Correlation","Grisha","Carla");
-        irisNative.set("","Correlation","Carla","Grisha");
-        irisNative.set("","Correlation","Dina","Carla");
-        irisNative.set("","Correlation","Armin","Bertolt");
-        irisNative.set("","Correlation","Reiner","Bertolt");
-        irisNative.set("","Correlation","Bertolt","Reiner");
-        irisNative.set("","Correlation","Levi","Zeke");
+        //set ^Relation("Eren","Mikasa")=""
+        irisNative.set("","Relation","Eren","Mikasa");
+        irisNative.set("","Relation","Eren","Armin");
+        irisNative.set("","Relation","Armin","Mikasa");
+        irisNative.set("","Relation","Mikasa","Armin");
+        irisNative.set("","Relation","Armin","Eren");
+        irisNative.set("","Relation","Mikasa","Eren");
+        irisNative.set("","Relation","Grisha","Eren");
+        irisNative.set("","Relation","Grisha","Zeke");
+        irisNative.set("","Relation","Eren","Zeke");
+        irisNative.set("","Relation","Zeke","Eren");
+        irisNative.set("","Relation","Grisha","Dina");
+        irisNative.set("","Relation","Dina","Grisha");            
+        irisNative.set("","Relation","Grisha","Carla");
+        irisNative.set("","Relation","Carla","Grisha");
+        irisNative.set("","Relation","Dina","Carla");
+        irisNative.set("","Relation","Armin","Bertolt");
+        irisNative.set("","Relation","Reiner","Bertolt");
+        irisNative.set("","Relation","Bertolt","Reiner");
+        irisNative.set("","Relation","Levi","Zeke");
 
-		System.out.println("****^Correlation(第1ノード) に登録された人の関係者を全件表示します *****");
+		System.out.println("****^Relation(第1ノード) に登録された人の関係者を全件表示します *****");
 
-        // ^Correlation
-		IRISIterator character=irisNative.getIRISIterator("Correlation");
+        // ^Relation
+		IRISIterator character=irisNative.getIRISIterator("Relation");
 		while (character.hasNext()) {
 			String source=character.next();
 			System.out.println("\n人物 = "+ source + " - 説明："+ character.getValue());
-            //関係のある人を表示（^Correlation）
-            IRISIterator correlate=irisNative.getIRISIterator("Correlation",source);
+            //関係のある人を表示（^Relation）
+            IRISIterator correlate=irisNative.getIRISIterator("Relation",source);
             while (correlate.hasNext()) {
                 String target=correlate.next();
                 System.out.println("   関係者 : "+ target);
             }
         }
 
-		System.out.println("\n\nIRISの管理ポータルで ^Correlation のデータを確認してください\n");
+		System.out.println("\n\nIRISの管理ポータルで ^Relation のデータを確認してください\n");
 
 
         System.out.print("\n指定した人物の関係者を探します。人物名を入力（Armin、Levi、Zeke など） >>");
@@ -121,7 +121,7 @@ public class Start{
             List<String> result = new ArrayList<String>();
             System.out.println("\n" + source + " の関係者を探します");
             //関係のある人を表示
-            IRISIterator correlate=irisNative.getIRISIterator("Correlation",source);
+            IRISIterator correlate=irisNative.getIRISIterator("Relation",source);
             while (correlate.hasNext()) {
                 String target=correlate.next();
                 System.out.println("   関係者 : " + target);
