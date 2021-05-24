@@ -69,7 +69,8 @@ ClassMethod GetCorrelationKey(key As %String) As %Status
     try {
         set %response.CharSet="utf8"
         set %response.ContentType="application/json"
-
+        
+        set array(key)=$get(^Correlation(key))
         do ..getTargets(key,1,.array)
         set source="",nodes=[],edgeArray=[],elements={}
         for {
